@@ -1,0 +1,352 @@
+
+=====JDBC===== 
+ 
+ Oct 12 2023 (10/11/2020 - Part 1)
+ 
+ Go through video
+ Make notes
+ understand/hands on practice
+ revision
+ push to github daily
+ 
+ Java data base connectivity
+ 
+ Database: to store data permanently (we can store data in variable that will be in temporary in nature)
+   Earlier - File System
+   
+   DB
+   MySQL - popular 
+   Oracle
+   Mongo DB 
+ 
+ Download mysql database s/w
+  - https://dev.mysql.com/downloads/installer/ 
+    331.3 MB
+	
+	only Local instance MYSQL 80 will be there by default
+	
+  one software used to run on particular port for mysql - 3306
+  
+   By default username : root
+     password : Kiran@123
+	 
+	we will get query window aftewards:
+	
+	--to create a database
+	create database database_name;
+	  (case in sensitive)
+	
+	--to connect and use the database
+	use database_name;
+	
+	--to create a table in database
+	create table table_name(column_name1 datatype(size),column_name2 datatype(size));
+	
+	--select every thing from table
+	   select * from table_name;
+	   
+	--insert values the table
+	 insert into table_name value(value1,value2);
+	 
+create database testing;
+use testing;
+create table student_info(first_name varchar(10), last_name varchar(10), city varchar(10));
+select * from student_info;
+	 
+	 
+ Interaction between java and database
+ 
+ 
+  Java --- Connector file ----- mysql 
+  
+  Any database we are using that respective connector file need to download
+  
+  downlaod mysql connector 
+  https://dev.mysql.com/downloads/connector/j/
+  
+  only take the jar file(java archieve)
+  
+  1. Create new - java project - project_name
+  2. create new folder lib for storing jar file
+  3. select project - java build path - libraries - add jars(from lib folder)
+  4. create class in src folder
+  
+  
+  ---Connecting with mysql db---
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+//class to connect with database
+public class A {
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//"jdbc:mysql://localhost:3306/testing", "root", "Kiran@123"
+		//protocol:database:localhost:portnumber:db_name username password
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testin", "root", "Kiran@123");
+			System.out.println("connection: "+connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+	
+========Insert values in db through java class=======
+package com.insert;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+//insert values into the db
+public class InsertIntoDB {
+  public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      try {
+			//connection to db
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing","root","Kiran@123");
+			//create statement for inserting
+			Statement createStatement = connection.createStatement();
+			//to write sql queries
+			createStatement.executeUpdate("insert into student_info values('pavan','mehtre','hyd')");
+			//close the connection costly resource
+			connection.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+	
+	
+Oct 13 - Part 2 - nothing in it..
+
+11/11/2020 - part 1
+Insert values dynamically
+ - variables need to insert like '"+variable_name+"'
+
+
+
+package com.insert;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+//insert values dynamically
+// duplicate entries possible - avoid it
+
+public class DynamicInserting {
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+try {
+//take user input  
+Scanner sc = new Scanner(System.in);
+System.out.println("Enter a first name: ");
+String first = sc.next();
+System.out.println("Enter a last name: ");
+String last_name = sc.next();
+//column name might not be same as variable name fine works properly
+System.out.println("Enter a city name: ");
+String city = sc.next();
+// connection to db
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing", "root",
+"Kiran@123");
+System.out.println("connection: " + connection);
+//create statement
+Statement createStatement = connection.createStatement();
+//execute queries
+createStatement.executeUpdate("insert into student_info values ('"+first+"','"+last_name+"','"+city+"')");
+connection.close();
+} catch (SQLException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+	}
+}
+
+
+---delete a record from db---
+package com.delete;
+
+ 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+ 
+
+public class DeleteRecord {
+
+ 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing","root","Kiran@123");
+		    Statement createStatement = connection.createStatement();
+		    createStatement.executeUpdate("delete from student_info where first_name = 'chai'");
+		    connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+ 
+
+	}
+
+ 
+
+}
+
+--delete a record dynamically---
+package com.delete;
+
+ 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+ 
+
+public class DeleteRecord {
+
+ 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing","root","Kiran@123");
+		    Statement createStatement = connection.createStatement();
+		    createStatement.executeUpdate("delete from student_info where first_name = 'chai'");
+		    connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+ 
+
+	}
+
+ 
+
+}
+
+executeUpdate method for inserting, deleting and updating 
+executeQuery method for retrieving the data 
+
+---to update the record---
+package com.update;
+
+ 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+ 
+
+//to update a record
+public class UpdateRecord {
+
+ 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing","root","Kiran@123");
+		    Statement createStatement = connection.createStatement();
+		    createStatement.executeUpdate("update student_info set city='Humnabad' where first_name='nishant' ");
+		    connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+ 
+
+	}
+
+ 
+
+}
+
+
+
+//to read record from db
+  - we use executeQuery method instead of executeUpdate method
+  - It will return set(group/collection of elements) of records 
+  
+  CRUD operation
+  Create - insert 
+  Read   - retrieve
+  Update - update 
+  Delete - delete
+
+package com.retrieve;
+
+ 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+ 
+
+//to retrieve record
+//go throgh storing in ResultSet and retrieving the value
+public class RetrieveRecord {
+
+ 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testing","root","Kiran@123");
+		    Statement createStatement = connection.createStatement();
+		    ResultSet set = createStatement.executeQuery("select * from student_info");
+		    System.out.println("set: "+set);
+
+		   while(set.next())
+		   {
+			   //to print all the column with records
+			   System.out.println(set.getString(1));
+			   System.out.println(set.getString(2));
+			   System.out.println(set.getString(3));
+		   }
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+ 
+
+	}
+
+ 
+
+}
+  
+ 
+ 
+ 

@@ -199,6 +199,84 @@ Your branch is up to date with 'origin/master'.
 nothing to commit, working tree clean
 
 
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
 
+nothing to commit, working tree clean
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git pull origin master
+From https://github.com/kirangond/jdbc_crud_operaion
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git add README.md
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   README.md
+
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git commit -m 'added git commands in read me file'
+[master 097d523] added git commands in read me file
+ 1 file changed, 202 insertions(+)
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 2.00 KiB | 2.00 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/kirangond/jdbc_crud_operaion.git
+   5348789..097d523  master -> master
+   
+===oct 16===
+
+creating new sub branch with master branch
+
+ code_changes_october with github UI itself
+   
+
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git fetch origin code_changes_october
+From https://github.com/kirangond/jdbc_crud_operaion
+ * branch            code_changes_october -> FETCH_HEAD
+ * [new branch]      code_changes_october -> origin/code_changes_october
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git branch
+* master
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (master)
+$ git checkout code_changes_october
+Switched to a new branch 'code_changes_october'
+Branch 'code_changes_october' set up to track remote branch 'code_changes_october' from 'origin'.
+
+gonda@LAPTOP-4UU3SGMU MINGW64 /c/jdbc_project/jdbc_crud (code_changes_october)
 
 
